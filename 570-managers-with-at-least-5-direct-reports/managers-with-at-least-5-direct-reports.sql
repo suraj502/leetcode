@@ -1,4 +1,4 @@
--- Write your PostgreSQL query statement below
+# Write your MySQL query statement below
 SELECT name FROM Employee e
 JOIN (
      SELECT managerId
