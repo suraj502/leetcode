@@ -1,14 +1,16 @@
 class Solution {
 public:
     string smallestPalindrome(string s) {
-        int n = s.size() / 2;
+        int n = s.size();
 
-sort(s.begin(), s.begin() + n);
+        // Sort only the first half
+        sort(s.begin(), s.begin() + n / 2);
 
-if (s.size() % 2 == 0)
-    sort(s.begin() + n, s.end(), greater<char>());
-else
-    sort(s.begin() + n + 1, s.end(), greater<char>());
-    return s;
+        // Rebuild the second half
+        for (int i = 0; i < n / 2; i++) {
+            s[n - 1 - i] = s[i];
+        }
+
+        return s;
     }
 };
