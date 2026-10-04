@@ -1,26 +1,24 @@
 class Solution {
 public:
-  void solve(int index,int k,   set<vector<int>>&st,vector<int>&curr,int n){
+  void solve(int index,int k,   vector<int>&curr,int n, vector<vector<int>>&ans){
   if(curr.size()==k){
-  st.insert(curr);
+  ans.push_back(curr);
     return ;
   }
 for(int i=index; i<=n; i++){
     curr.push_back(i);
-    solve(i+1, k, st, curr, n);
+    solve(i+1, k,  curr, n,ans);
     curr.pop_back();
 }
 
   }
 
     vector<vector<int>> combine(int n, int k) {
-       set<vector<int>> st; 
+      
         vector<vector<int>>ans;
         vector<int>curr;
-        solve(1,k,st,curr,n);
-        for(auto it:st){
-            ans.push_back(it);
-        }
+        solve(1,k,curr,n,ans);
+      
         return ans;
     }
 };
