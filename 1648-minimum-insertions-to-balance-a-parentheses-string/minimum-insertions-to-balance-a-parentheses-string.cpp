@@ -1,40 +1,27 @@
 class Solution {
 public:
     int minInsertions(string s) {
-
-        stack<char> st;
         int ans = 0;
+        int cnt = 0;
 
         for (int i = 0; i < s.size(); i++) {
-
             if (s[i] == '(') {
-                st.push('(');
-            }
-            else {
-
-                // Check whether we have ))
-                if (i + 1 < s.size() && s[i + 1] == ')') {
-                    i++;  // consume second ')'
-                }
-                else {
-                    // Only one ')' -> insert another ')'
+                if (cnt % 2 == 1) {
                     ans++;
+                    cnt--;
                 }
+                cnt += 2;
+            } 
+            else {
+                cnt--;
 
-                // Now we have a complete ))
-                if (!st.empty()) {
-                    st.pop();
-                }
-                else {
-                    // No '(' to match this ))
-                    ans++; // insert '('
+                if (cnt < 0) {
+                    ans++;
+                    cnt = 1;
                 }
             }
         }
 
-        // Remaining '(' each need ))
-        ans += st.size() * 2;
-
-        return ans;
+        return ans + cnt;
     }
 };
