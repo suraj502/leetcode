@@ -3,7 +3,7 @@ class Solution {
 public:
     int carFleet(int target, vector<int>& position, vector<int>& speed) {
         vector<pair<int, double>> cal;
-        stack<pair<int, double>> st;
+       
 
         int n = position.size();
 
@@ -18,12 +18,14 @@ public:
         sort(cal.begin(), cal.end());
 
         // Process from closest to target to farthest
+        int fleet=0;    double max_time = 0.0;
         for (int i = n - 1; i >= 0; i--) {
-            if (st.empty() || cal[i].second > st.top().second) {
-                st.push(cal[i]);
+            if ( cal[i].second >max_time) {
+                fleet++;
+                 max_time =cal[i].second;
             }
         }
 
-        return st.size();
+        return fleet;
     }
 };
